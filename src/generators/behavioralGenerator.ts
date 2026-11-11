@@ -1,4 +1,4 @@
-import { Question, Difficulty } from '../types';
+import { Question } from '../types';
 
 let behCounter = 3000;
 
@@ -45,6 +45,8 @@ export function generateBehavioralQuestion(): Question {
   ];
 
   const item = scenarios[Math.floor(Math.random() * scenarios.length)];
+  const matchedChoice = item.choices.find(c => c.id === item.correctId);
+  const correctText = matchedChoice ? matchedChoice.text : item.choices[0].text;
 
   return {
     id: `beh-sjt-${behCounter}`,
@@ -54,7 +56,7 @@ export function generateBehavioralQuestion(): Question {
     prompt: item.prompt,
     choices: item.choices,
     correctAnswerId: item.correctId,
-    explanation: `Evaluation Rubric:\n- Most Constructive Response: ${item.choices.find(c => c.id === item.correctId)?.text}\n\n- Why this is the strongest approach: ${item.strongestReason}\n\n- Practical Workplace Note: ${item.caveat}`,
+    explanation: `Evaluation Rubric:\n- Most Constructive Response: ${correctText}\n\n- Why this is the strongest approach: ${item.strongestReason}\n\n- Practical Workplace Note: ${item.caveat}`,
     keyConcept: item.competency,
     behavioralRubric: {
       competency: item.competency,
