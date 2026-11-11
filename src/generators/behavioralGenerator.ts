@@ -2,9 +2,18 @@ import { Question } from '../types';
 
 let behCounter = 3000;
 
+interface Scenario {
+  competency: string;
+  prompt: string;
+  choices: { id: string; text: string }[];
+  correctId: string;
+  strongestReason: string;
+  caveat: string;
+}
+
 export function generateBehavioralQuestion(): Question {
   behCounter++;
-  const scenarios = [
+  const scenarios: Scenario[] = [
     {
       competency: 'Accountability and Blameless Root-Cause Analysis',
       prompt: "Two hours before a scheduled client presentation, you notice that an edge-case bug in your recent pull request causes user session timeouts under heavy load. Your team lead has not noticed yet. What is the MOST appropriate action?",
@@ -27,6 +36,7 @@ export function generateBehavioralQuestion(): Question {
         { id: 'c', text: 'Attempt to rewrite the assigned module using a language you are already comfortable with without informing the architecture team.' },
         { id: 'd', text: 'Spend the entire five days reading general books without writing code, then declare an impediment on the final day.' }
       ],
+      correctId: 'a',
       strongestReason: 'Demonstrates self-directed learning agility, pragmatic scoping, and efficient, targeted escalation.',
       caveat: 'Ensure team leads are aware early during daily standups of your onboarding progress so estimates can be calibrated.'
     },
@@ -39,6 +49,7 @@ export function generateBehavioralQuestion(): Question {
         { id: 'c', text: 'Approve your own pull request to bypass the senior review restrictions.' },
         { id: 'd', text: 'Privately complain to your manager that the reviewer is being overly critical about non-functional details.' }
       ],
+      correctId: 'a',
       strongestReason: 'Code reviews are quality gates and collaborative learning experiences, not personal evaluations. Embracing technical feedback accelerates professional growth.',
       caveat: 'If requirements contradict between reviewers, schedule a brief sync meeting to build consensus constructively.'
     }
